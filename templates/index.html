@@ -1,0 +1,889 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Estate Compass</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.replit.com/agent/bootstrap-agent-dark-theme.min.css">
+    <!-- Google Fonts -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand d-flex align-items-center" href="/">
+                <i class="fas fa-compass fa-fw me-2"></i>
+                <span>Smart Estate Compass</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#economic-trends">
+                            <i class="fas fa-chart-line fa-fw me-1"></i> Economic Trends
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#property-price">
+                            <i class="fas fa-home fa-fw me-1"></i> Property Prices
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#location-intelligence">
+                            <i class="fas fa-map-marker-alt fa-fw me-1"></i> Location Intelligence
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#investment-timing">
+                            <i class="fas fa-clock fa-fw me-1"></i> Investment Timing
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#roi-calculator">
+                            <i class="fas fa-calculator fa-fw me-1"></i> ROI Calculator
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#dashboard">
+                            <i class="fas fa-tachometer-alt fa-fw me-1"></i> Dashboard
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="hero-section">
+        <div class="container px-5">
+            <div class="row gx-5 justify-content-center">
+                <div class="col-lg-10">
+                    <div class="hero-content text-center my-5 animate-on-scroll">
+                        <h1 class="hero-title animate-on-scroll">Smart Estate Compass</h1>
+                        <p class="hero-subtitle text-white-50 mx-auto animate-on-scroll animate-delay-1">
+                            Your comprehensive real estate intelligence platform powered by advanced analytics and market trends
+                        </p>
+                        <div class="d-grid gap-3 d-sm-flex justify-content-sm-center animate-on-scroll animate-delay-2">
+                            <a class="btn btn-primary btn-lg px-4 me-sm-3" href="#economic-trends">
+                                <i class="fas fa-chart-line me-2"></i> Get Started
+                            </a>
+                            <a class="btn btn-outline-light btn-lg px-4" href="#dashboard">
+                                <i class="fas fa-tachometer-alt me-2"></i> View Dashboard
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Economic Trends Section -->
+    <section id="economic-trends" class="py-5">
+        <div class="container px-5">
+            <div class="row justify-content-center">
+                <div class="col-lg-10">
+                    <h2 class="fw-bold mb-4">Economic Trends</h2>
+                    <div class="card shadow-sm mb-4">
+                        <div class="card-body">
+                            <h5 class="card-title">Interest Rates & Inflation</h5>
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <div class="border rounded p-3 trend-card">
+                                        <h6>Current Interest Rate</h6>
+                                        <div class="d-flex align-items-center">
+                                            <div class="fs-1 fw-bold" id="interest-rate">5.25%</div>
+                                            <div class="trend-indicator ms-2 text-success" id="interest-rate-trend">▼ -0.25%</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <div class="border rounded p-3 trend-card">
+                                        <h6>Inflation Rate</h6>
+                                        <div class="d-flex align-items-center">
+                                            <div class="fs-1 fw-bold" id="inflation-rate">3.1%</div>
+                                            <div class="trend-indicator ms-2 text-success" id="inflation-trend">▼ -0.4%</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mt-3">
+                                <canvas id="economic-trends-chart" height="250"></canvas>
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <small class="text-muted">Source: Trading Economics (Updated: <span id="economic-update-date">April 23, 2025</span>)</small>
+                        </div>
+                    </div>
+
+                    <div class="card shadow-sm mb-4">
+                        <div class="card-body">
+                            <h5 class="card-title">GDP & Housing Market</h5>
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <div class="border rounded p-3 trend-card">
+                                        <h6>GDP Growth Rate</h6>
+                                        <div class="d-flex align-items-center">
+                                            <div class="fs-1 fw-bold" id="gdp-rate">2.3%</div>
+                                            <div class="trend-indicator ms-2 text-success" id="gdp-trend">▲ 0.2%</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <div class="border rounded p-3 trend-card">
+                                        <h6>Housing Market Direction</h6>
+                                        <div class="fs-1 fw-bold" id="market-direction">Moderate Decline</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mt-3">
+                                <canvas id="housing-market-chart" height="250"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Property Price Section -->
+    <section id="property-price" class="py-5 bg-light">
+        <div class="container px-5">
+            <div class="row justify-content-center">
+                <div class="col-lg-10">
+                    <h2 class="fw-bold mb-4">Property Price Prediction</h2>
+                    <div class="card shadow-sm mb-4">
+                        <div class="card-body">
+                            <form id="price-prediction-form">
+                                <div class="row mb-3">
+                                    <div class="col-md-6">
+                                        <label for="location" class="form-label">Location</label>
+                                        <input type="text" class="form-control" id="location" value="San Francisco, CA" required>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="property-type" class="form-label">Property Type</label>
+                                        <select class="form-select" id="property-type" required>
+                                            <option value="residential">Residential</option>
+                                            <option value="commercial">Commercial</option>
+                                            <option value="land">Land</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="row mb-3">
+                                    <div class="col-md-4">
+                                        <label for="area-sqft" class="form-label">Area (sqft)</label>
+                                        <input type="number" class="form-control" id="area-sqft" value="2000" required>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label for="bedrooms" class="form-label">Bedrooms</label>
+                                        <input type="number" class="form-control" id="bedrooms" value="3">
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label for="bathrooms" class="form-label">Bathrooms</label>
+                                        <input type="number" class="form-control" id="bathrooms" value="2">
+                                    </div>
+                                </div>
+                                <div class="row mb-3">
+                                    <div class="col-md-6">
+                                        <label for="year-built" class="form-label">Year Built</label>
+                                        <input type="number" class="form-control" id="year-built" value="2010">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="forecast-period" class="form-label">Forecast Period</label>
+                                        <select class="form-select" id="forecast-period" required>
+                                            <option value="6m">6 Months</option>
+                                            <option value="1y" selected>1 Year</option>
+                                            <option value="5y">5 Years</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="d-grid">
+                                    <button type="submit" class="btn btn-primary">Predict Price</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+                    <div id="prediction-results" class="card shadow-sm mb-4 d-none">
+                        <div class="card-body">
+                            <h5 class="card-title">Prediction Results</h5>
+                            <div class="row mb-4">
+                                <div class="col-md-6">
+                                    <div class="border rounded p-3 mb-3">
+                                        <h6>Current Estimated Price</h6>
+                                        <div class="fs-1 fw-bold" id="current-price">$2,425,500</div>
+                                        <div class="small text-muted" id="price-per-sqft">$1,050 per sqft</div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="border rounded p-3 mb-3">
+                                        <h6>Market Assessment</h6>
+                                        <div class="fs-2 fw-bold text-warning" id="market-assessment">Overvalued</div>
+                                        <div class="small text-muted" id="assessment-percentage">7.4% above fair market value</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <h6>Price Forecast</h6>
+                                <canvas id="price-forecast-chart" height="250"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Location Intelligence Section -->
+    <section id="location-intelligence" class="py-5">
+        <div class="container px-5">
+            <div class="row justify-content-center">
+                <div class="col-lg-10">
+                    <h2 class="fw-bold mb-4">Location Intelligence</h2>
+                    <div class="card shadow-sm mb-4">
+                        <div class="card-body">
+                            <form id="location-score-form">
+                                <div class="row mb-3">
+                                    <div class="col-md-9">
+                                        <label for="location-address" class="form-label">Location</label>
+                                        <input type="text" class="form-control" id="location-address" value="San Francisco, CA" required>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <label for="location-radius" class="form-label">Radius (m)</label>
+                                        <input type="number" class="form-control" id="location-radius" value="1000">
+                                    </div>
+                                </div>
+                                <div class="d-grid">
+                                    <button type="submit" class="btn btn-primary">Get Location Score</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+                    <div id="location-results" class="card shadow-sm mb-4 d-none">
+                        <div class="card-body">
+                            <h5 class="card-title">Location Score</h5>
+                            <div class="row mb-4">
+                                <div class="col-md-6">
+                                    <div class="border rounded p-3 mb-3">
+                                        <h6>Overall Score</h6>
+                                        <div class="progress mb-3">
+                                            <div class="progress-bar bg-success" id="total-score-bar" role="progressbar" style="width: 73%" aria-valuenow="73" aria-valuemin="0" aria-valuemax="100"></div>
+                                        </div>
+                                        <div class="fs-1 fw-bold text-center" id="total-score">73/100</div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="border rounded p-3 mb-3">
+                                        <canvas id="location-score-chart" height="200"></canvas>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4 mb-3">
+                                    <div class="card h-100">
+                                        <div class="card-body">
+                                            <h6 class="card-title">Schools</h6>
+                                            <div class="progress">
+                                                <div class="progress-bar bg-primary" id="schools-score-bar" role="progressbar" style="width: 77%" aria-valuenow="77" aria-valuemin="0" aria-valuemax="100"></div>
+                                            </div>
+                                            <div class="text-center mt-2" id="schools-score">77/100</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 mb-3">
+                                    <div class="card h-100">
+                                        <div class="card-body">
+                                            <h6 class="card-title">Healthcare</h6>
+                                            <div class="progress">
+                                                <div class="progress-bar bg-info" id="hospitals-score-bar" role="progressbar" style="width: 71%" aria-valuenow="71" aria-valuemin="0" aria-valuemax="100"></div>
+                                            </div>
+                                            <div class="text-center mt-2" id="hospitals-score">71/100</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 mb-3">
+                                    <div class="card h-100">
+                                        <div class="card-body">
+                                            <h6 class="card-title">Transport</h6>
+                                            <div class="progress">
+                                                <div class="progress-bar bg-warning" id="transport-score-bar" role="progressbar" style="width: 73%" aria-valuenow="73" aria-valuemin="0" aria-valuemax="100"></div>
+                                            </div>
+                                            <div class="text-center mt-2" id="transport-score">73/100</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 mb-3">
+                                    <div class="card h-100">
+                                        <div class="card-body">
+                                            <h6 class="card-title">Crime</h6>
+                                            <div class="progress">
+                                                <div class="progress-bar bg-danger" id="crime-score-bar" role="progressbar" style="width: 74%" aria-valuenow="74" aria-valuemin="0" aria-valuemax="100"></div>
+                                            </div>
+                                            <div class="text-center mt-2" id="crime-score">74/100</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 mb-3">
+                                    <div class="card h-100">
+                                        <div class="card-body">
+                                            <h6 class="card-title">Green Zones</h6>
+                                            <div class="progress">
+                                                <div class="progress-bar bg-success" id="green-zones-score-bar" role="progressbar" style="width: 62%" aria-valuenow="62" aria-valuemin="0" aria-valuemax="100"></div>
+                                            </div>
+                                            <div class="text-center mt-2" id="green-zones-score">62/100</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 mb-3">
+                                    <div class="card h-100">
+                                        <div class="card-body">
+                                            <h6 class="card-title">Development</h6>
+                                            <div class="progress">
+                                                <div class="progress-bar bg-secondary" id="development-score-bar" role="progressbar" style="width: 74%" aria-valuenow="74" aria-valuemin="0" aria-valuemax="100"></div>
+                                            </div>
+                                            <div class="text-center mt-2" id="development-score">74/100</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Investment Timing Section -->
+    <section id="investment-timing" class="py-5 bg-light">
+        <div class="container px-5">
+            <div class="row justify-content-center">
+                <div class="col-lg-10">
+                    <h2 class="fw-bold mb-4">Investment Timing</h2>
+                    <div class="card shadow-sm mb-4">
+                        <div class="card-body">
+                            <form id="investment-recommendation-form">
+                                <div class="row mb-3">
+                                    <div class="col-md-6">
+                                        <label for="investment-location" class="form-label">Location</label>
+                                        <input type="text" class="form-control" id="investment-location" value="San Francisco, CA" required>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="investment-property-type" class="form-label">Property Type</label>
+                                        <select class="form-select" id="investment-property-type" required>
+                                            <option value="residential">Residential</option>
+                                            <option value="commercial">Commercial</option>
+                                            <option value="land">Land</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="row mb-3">
+                                    <div class="col-md-4">
+                                        <label for="investment-goal" class="form-label">Investment Goal</label>
+                                        <select class="form-select" id="investment-goal" required>
+                                            <option value="flip">Flip</option>
+                                            <option value="rent" selected>Rent</option>
+                                            <option value="hold">Hold</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label for="timeframe" class="form-label">Timeframe (years)</label>
+                                        <input type="number" class="form-control" id="timeframe" value="5" min="1" required>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label for="budget" class="form-label">Budget</label>
+                                        <input type="number" class="form-control" id="budget" value="500000">
+                                    </div>
+                                </div>
+                                <div class="d-grid">
+                                    <button type="submit" class="btn btn-primary">Get Recommendation</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+                    <div id="investment-results" class="card shadow-sm mb-4 d-none">
+                        <div class="card-body">
+                            <h5 class="card-title">Investment Recommendation</h5>
+                            <div class="row mb-3">
+                                <div class="col-md-8">
+                                    <div class="border rounded p-3">
+                                        <h5 id="recommendation-action">BUY NOW</h5>
+                                        <p id="recommendation-description">The market is favorable for investment in San Francisco, CA residential properties for rental purposes. Current conditions indicate good potential for both cash flow and appreciation.</p>
+                                        <div class="mt-2">
+                                            <span class="badge bg-success">High Confidence (85%)</span>
+                                            <span class="badge bg-info ms-2">Optimal Timing: Now</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="border rounded p-3 text-center">
+                                        <h6>Estimated ROI</h6>
+                                        <div class="display-4 text-success">8.5%</div>
+                                        <div class="small text-muted">Annual return</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <h6>Price Momentum</h6>
+                                <canvas id="price-momentum-chart" height="250"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ROI Calculator Section -->
+    <section id="roi-calculator" class="py-5">
+        <div class="container px-5">
+            <div class="row justify-content-center">
+                <div class="col-lg-10">
+                    <h2 class="fw-bold mb-4">ROI Calculator</h2>
+                    <div class="card shadow-sm mb-4">
+                        <div class="card-body">
+                            <form id="roi-calculator-form">
+                                <div class="row mb-3">
+                                    <div class="col-md-6">
+                                        <label for="roi-location" class="form-label">Location</label>
+                                        <input type="text" class="form-control" id="roi-location" value="San Francisco, CA" required>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="roi-property-type" class="form-label">Property Type</label>
+                                        <select class="form-select" id="roi-property-type" required>
+                                            <option value="residential">Residential</option>
+                                            <option value="commercial">Commercial</option>
+                                            <option value="land">Land</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="row mb-3">
+                                    <div class="col-md-4">
+                                        <label for="purchase-price" class="form-label">Purchase Price</label>
+                                        <input type="number" class="form-control" id="purchase-price" value="1200000" required>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label for="roi-investment-goal" class="form-label">Investment Goal</label>
+                                        <select class="form-select" id="roi-investment-goal" required>
+                                            <option value="flip">Flip</option>
+                                            <option value="rent" selected>Rent</option>
+                                            <option value="hold">Hold</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label for="roi-timeframe" class="form-label">Timeframe (years)</label>
+                                        <input type="number" class="form-control" id="roi-timeframe" value="10" min="1" required>
+                                    </div>
+                                </div>
+                                <div class="row mb-3">
+                                    <div class="col-md-4">
+                                        <label for="additional-investment" class="form-label">Additional Investment</label>
+                                        <input type="number" class="form-control" id="additional-investment" value="50000">
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label for="expected-rent" class="form-label">Expected Rent (monthly)</label>
+                                        <input type="number" class="form-control" id="expected-rent" value="5500">
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label for="expected-expenses" class="form-label">Expected Expenses (monthly)</label>
+                                        <input type="number" class="form-control" id="expected-expenses" value="2000">
+                                    </div>
+                                </div>
+                                <div class="d-grid">
+                                    <button type="submit" class="btn btn-primary">Calculate ROI</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+                    <div id="roi-results" class="card shadow-sm mb-4 d-none">
+                        <div class="card-body">
+                            <h5 class="card-title">ROI Calculation Results</h5>
+                            <div class="row mb-3">
+                                <div class="col-md-6">
+                                    <div class="border rounded p-3 mb-3">
+                                        <h6>Total ROI</h6>
+                                        <div class="fs-1 fw-bold text-success" id="total-roi">73.02%</div>
+                                        <div class="small text-muted" id="annual-roi">7.3% annually over 10 years</div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="border rounded p-3 mb-3">
+                                        <h6>Monthly Cash Flow</h6>
+                                        <div class="fs-1 fw-bold" id="monthly-cash-flow">$3,500</div>
+                                        <div class="small text-muted" id="annual-cash-flow">$42,000 annually</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <div class="col-md-4">
+                                    <div class="card h-100">
+                                        <div class="card-body">
+                                            <h6 class="card-title">Breakeven</h6>
+                                            <div class="fs-2 fw-bold" id="breakeven-time">30 years</div>
+                                            <div class="small text-muted">To recoup investment</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="card h-100">
+                                        <div class="card-body">
+                                            <h6 class="card-title">Cap Rate</h6>
+                                            <div class="fs-2 fw-bold" id="cap-rate">3.5%</div>
+                                            <div class="small text-muted">Net income / property value</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="card h-100">
+                                        <div class="card-body">
+                                            <h6 class="card-title">Cash-on-Cash Return</h6>
+                                            <div class="fs-2 fw-bold" id="cash-on-cash">3.36%</div>
+                                            <div class="small text-muted">Annual cash flow / cash invested</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <h6>Return Drivers</h6>
+                                <canvas id="roi-drivers-chart" height="250"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Dashboard Section -->
+    <section id="dashboard" class="py-5 bg-light">
+        <div class="container px-5">
+            <div class="row justify-content-center">
+                <div class="col-lg-10">
+                    <div class="d-flex justify-content-between align-items-center mb-4">
+                        <h2 class="section-title">Dashboard</h2>
+                        <button class="btn btn-outline-primary" id="export-report-btn">
+                            <i class="fas fa-file-pdf me-2"></i> Export PDF Report
+                        </button>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-3 mb-4">
+                            <div class="card dashboard-card h-100">
+                                <div class="card-body text-center">
+                                    <div class="d-inline-flex align-items-center justify-content-center rounded-circle p-3 mb-3" style="background: rgba(58, 141, 255, 0.1);">
+                                        <i class="fas fa-bell fa-2x text-primary"></i>
+                                    </div>
+                                    <h5 class="card-title">Active Alerts</h5>
+                                    <div class="dashboard-number">1</div>
+                                    <div class="small text-muted">Price change, investment opportunity</div>
+                                </div>
+                                <div class="card-footer">
+                                    <button type="button" class="btn btn-sm btn-outline-primary w-100" data-bs-toggle="modal" data-bs-target="#manageAlertsModal">
+                                        <i class="fas fa-cog me-2"></i> Manage Alerts
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3 mb-4">
+                            <div class="card dashboard-card h-100">
+                                <div class="card-body text-center">
+                                    <div class="d-inline-flex align-items-center justify-content-center rounded-circle p-3 mb-3" style="background: rgba(132, 250, 176, 0.1);">
+                                        <i class="fas fa-home fa-2x text-success"></i>
+                                    </div>
+                                    <h5 class="card-title">Saved Properties</h5>
+                                    <div class="dashboard-number">0</div>
+                                    <div class="small text-muted">Add properties to track</div>
+                                </div>
+                                <div class="card-footer">
+                                    <button type="button" class="btn btn-sm btn-outline-success w-100" data-bs-toggle="modal" data-bs-target="#addPropertyModal">
+                                        <i class="fas fa-plus me-2"></i> Add Property
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3 mb-4">
+                            <div class="card dashboard-card h-100">
+                                <div class="card-body text-center">
+                                    <div class="d-inline-flex align-items-center justify-content-center rounded-circle p-3 mb-3" style="background: rgba(246, 211, 101, 0.1);">
+                                        <i class="fas fa-map-marker-alt fa-2x text-warning"></i>
+                                    </div>
+                                    <h5 class="card-title">Saved Locations</h5>
+                                    <div class="dashboard-number">0</div>
+                                    <div class="small text-muted">Add locations to track</div>
+                                </div>
+                                <div class="card-footer">
+                                    <button type="button" class="btn btn-sm btn-outline-warning w-100" data-bs-toggle="modal" data-bs-target="#addLocationModal">
+                                        <i class="fas fa-plus me-2"></i> Add Location
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3 mb-4">
+                            <div class="card dashboard-card h-100">
+                                <div class="card-body text-center">
+                                    <div class="d-inline-flex align-items-center justify-content-center rounded-circle p-3 mb-3" style="background: rgba(255, 154, 158, 0.1);">
+                                        <i class="fas fa-chart-line fa-2x text-danger"></i>
+                                    </div>
+                                    <h5 class="card-title">Market Status</h5>
+                                    <div class="text-warning market-status">Neutral</div>
+                                    <div>Moderate Decline</div>
+                                </div>
+                                <div class="card-footer">
+                                    <a href="#economic-trends" class="btn btn-sm btn-outline-danger w-100">
+                                        <i class="fas fa-arrow-right me-2"></i> View Details
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Modals for Dashboard Actions -->
+    
+    <!-- Manage Alerts Modal -->
+    <div class="modal fade" id="manageAlertsModal" tabindex="-1" aria-labelledby="manageAlertsModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="manageAlertsModalLabel">Manage Alerts</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Type</th>
+                                    <th>Location</th>
+                                    <th>Condition</th>
+                                    <th>Notification</th>
+                                    <th>Status</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Price Change</td>
+                                    <td>San Francisco, CA</td>
+                                    <td>Above $1,500,000</td>
+                                    <td>Email (Weekly)</td>
+                                    <td><span class="badge bg-success">Active</span></td>
+                                    <td>
+                                        <button class="btn btn-sm btn-outline-danger">
+                                            <i class="fas fa-trash"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <hr>
+                    <h6>Create New Alert</h6>
+                    <form id="create-alert-form">
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label class="form-label">Alert Type</label>
+                                <select class="form-select">
+                                    <option>Price Change</option>
+                                    <option>Investment Opportunity</option>
+                                    <option>Market Trend</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">Location</label>
+                                <input type="text" class="form-control" placeholder="Enter location">
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-md-4">
+                                <label class="form-label">Condition</label>
+                                <select class="form-select">
+                                    <option>Above</option>
+                                    <option>Below</option>
+                                    <option>Equal</option>
+                                </select>
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-label">Threshold Value</label>
+                                <input type="number" class="form-control" placeholder="Enter value">
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-label">Frequency</label>
+                                <select class="form-select">
+                                    <option>Immediately</option>
+                                    <option>Daily</option>
+                                    <option>Weekly</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label class="form-label">Notification Method</label>
+                                <select class="form-select" id="notification-method">
+                                    <option value="email">Email</option>
+                                    <option value="sms">SMS</option>
+                                    <option value="both">Both</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">Email Address</label>
+                                <input type="email" class="form-control" placeholder="Enter email">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Create Alert</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Add Property Modal -->
+    <div class="modal fade" id="addPropertyModal" tabindex="-1" aria-labelledby="addPropertyModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="addPropertyModalLabel">Add Property</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="add-property-form">
+                        <div class="mb-3">
+                            <label class="form-label">Property Name</label>
+                            <input type="text" class="form-control" placeholder="Enter property name or reference">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Address</label>
+                            <input type="text" class="form-control" placeholder="Enter full address">
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label class="form-label">Property Type</label>
+                                <select class="form-select">
+                                    <option>Residential</option>
+                                    <option>Commercial</option>
+                                    <option>Land</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">Status</label>
+                                <select class="form-select">
+                                    <option>For Sale</option>
+                                    <option>For Rent</option>
+                                    <option>Owned</option>
+                                    <option>Watching</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label class="form-label">Price/Value</label>
+                                <input type="number" class="form-control" placeholder="Enter amount">
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">Area (sqft)</label>
+                                <input type="number" class="form-control" placeholder="Enter area">
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-md-4">
+                                <label class="form-label">Bedrooms</label>
+                                <input type="number" class="form-control" placeholder="Enter bedrooms">
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-label">Bathrooms</label>
+                                <input type="number" class="form-control" placeholder="Enter bathrooms">
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-label">Year Built</label>
+                                <input type="number" class="form-control" placeholder="Enter year">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-success">Add Property</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Add Location Modal -->
+    <div class="modal fade" id="addLocationModal" tabindex="-1" aria-labelledby="addLocationModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="addLocationModalLabel">Add Location</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="add-location-form">
+                        <div class="mb-3">
+                            <label class="form-label">Location Name</label>
+                            <input type="text" class="form-control" placeholder="Enter name (e.g., 'Work Area')">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Address/City</label>
+                            <input type="text" class="form-control" placeholder="Enter location address or city">
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label class="form-label">Radius (meters)</label>
+                                <input type="number" class="form-control" value="1000">
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">Priority</label>
+                                <select class="form-select">
+                                    <option>High</option>
+                                    <option selected>Medium</option>
+                                    <option>Low</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Notes</label>
+                            <textarea class="form-control" rows="3" placeholder="Enter any notes about this location"></textarea>
+                        </div>
+                        <div class="mb-3 form-check">
+                            <input type="checkbox" class="form-check-input" id="trackMarketCheck" checked>
+                            <label class="form-check-label" for="trackMarketCheck">Track market trends for this location</label>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-warning">Add Location</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="py-5 bg-dark">
+        <div class="container px-5">
+            <p class="m-0 text-center text-white">Copyright &copy; Smart Estate Compass 2025</p>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Custom JavaScript -->
+    <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+</body>
+</html>
