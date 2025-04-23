@@ -10,6 +10,7 @@
 
 ## INSTRUCTIONS
 also rename "venv_root" to just "venv" and move it into the root folder and move the venv folder to the MAPDATAFETCHER folder
+and also unzip the files
 
 
 
